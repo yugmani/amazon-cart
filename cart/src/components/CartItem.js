@@ -3,22 +3,24 @@ import styled from "styled-components";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 
-function CartItem() {
+function CartItem({ item }) {
   return (
     <ItemContainer>
-      <CartImage
-        src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/ipad-pro-12-select-wifi-spacegray-202003?wid=470&hei=556&fmt=png-alpha&.v=1583552356577"
-        alt="pro"
-      />
+      <CartImage>
+        <ImgContainer
+          src={process.env.PUBLIC_URL + "/images/" + item.image}
+          alt={item.image}
+        />
+      </CartImage>
       <ItemDetails>
-        <ItemName>Apple iPad Pro</ItemName>
+        <ItemName>{item.title}</ItemName>
 
-        <StockInfo>In Stock</StockInfo>
+        <StockInfo>{item.stock}</StockInfo>
 
         <ItemQuantity>
           <Quantity>
             {/* <label for="Qty"> </label> */}
-            <QuantitySelect name="Qty" id="qty">
+            <QuantitySelect name="Qty" id="qty" value={item.quantity}>
               <option value="1">Qty:1</option>
               <option value="2">Qty:2</option>
               <option value="3">Qty:3</option>
@@ -34,7 +36,7 @@ function CartItem() {
           </ItemDelete>
         </ItemQuantity>
       </ItemDetails>
-      <ItemPrice>$769.00</ItemPrice>
+      <ItemPrice>{item.price}</ItemPrice>
     </ItemContainer>
   );
 }
@@ -49,10 +51,17 @@ const ItemContainer = styled.div`
   border-bottom: 1px solid #ddd;
 `;
 
-const CartImage = styled.img`
-  flex: 0.3;
-  max-width: 100px;
-  max-height: 150px;
+const CartImage = styled.div`
+  flex: 0.4;
+  min-width: 120px;
+  min-height: 150px;
+  flex-shrink: 0;
+  flex-grow: 0;
+`;
+
+const ImgContainer = styled.img`
+  max-width: 100%;
+  height: auto;
   object-fit: contain;
 `;
 
@@ -87,6 +96,7 @@ const ItemPrice = styled.div`
   font-weight: 700;
   font-size: 18px;
   text-align: right;
+  margin-left: 16px;
 `;
 
 const Quantity = styled.div``;
