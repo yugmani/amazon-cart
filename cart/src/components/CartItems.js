@@ -4,7 +4,7 @@ import styled from "styled-components";
 import CartItem from "./CartItem";
 
 function CartItems({ items }) {
-  console.log("From CartItems Component:", items);
+  // console.log("From CartItems Component:", items);
   return (
     <Container>
       <HeadingContainer>Shopping Cart</HeadingContainer>

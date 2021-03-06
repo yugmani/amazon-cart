@@ -1,8 +1,25 @@
 import React from "react";
 import styled from "styled-components";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
+import NumberFormat from "react-number-format";
 
-function CartTotal() {
+function CartTotal({ items }) {
+  const getTotalPrice = () => {
+    let totalPrice = 0;
+    items.forEach((item) => {
+      totalPrice += parseFloat(item.price) * parseInt(item.quantity);
+    });
+    return totalPrice;
+  };
+
+  const getTotalQuantity = () => {
+    let totalQuantity = 0;
+    items.forEach((item) => {
+      totalQuantity += parseInt(item.quantity);
+    });
+    return totalQuantity;
+  };
+
   return (
     <Container>
       <CartHeaderContainer>
@@ -11,7 +28,17 @@ function CartTotal() {
       </CartHeaderContainer>
       <TotalContainer>
         <HeaderThree>
-          Subtotal(5 items):<TotalPriceContainer>$12541.00</TotalPriceContainer>{" "}
+          Subtotal({getTotalQuantity()}):
+          <TotalPriceContainer>
+            <NumberFormat
+              value={getTotalPrice()}
+              displayType={"text"}
+              thousandSeparator={true}
+              prefix={"$"}
+              decimalScale={2}
+              fixedDecimalScale={true}
+            />
+          </TotalPriceContainer>{" "}
         </HeaderThree>
       </TotalContainer>
       <ButtonContainer>Proceed to checkout</ButtonContainer>
@@ -23,7 +50,7 @@ export default CartTotal;
 
 const Container = styled.div`
   padding: 15px;
-  background-color: pink;
+  background-color: white;
 `;
 
 const CartHeaderContainer = styled.div`
