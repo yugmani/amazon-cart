@@ -4,14 +4,28 @@ import styled from "styled-components";
 import CartItem from "./CartItem";
 
 function CartItems({ items }) {
-  // console.log("From CartItems Component:", items);
+  const changeItemQuantity = (e, index) => {
+    //When we select a quantity on item, we pass it in here
+    //Pass in the index
+    //using the index we need to change the quantity to the selected one from select option
+    //update the items state
+    console.log(e.target.value);
+    console.log("index:", index);
+    items[index].quantity = e.target.value;
+  };
+
   return (
     <Container>
       <HeadingContainer>Shopping Cart</HeadingContainer>
       <hr />
       <CartContainer>
         {items.map((item, index) => (
-          <CartItem key={index} item={item} />
+          <CartItem
+            index={index}
+            key={index}
+            item={item}
+            changeItemQuantity={changeItemQuantity}
+          />
         ))}
       </CartContainer>
     </Container>

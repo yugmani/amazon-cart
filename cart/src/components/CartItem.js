@@ -3,7 +3,7 @@ import styled from "styled-components";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 
-function CartItem({ item }) {
+function CartItem({ index, item, changeItemQuantity }) {
   return (
     <ItemContainer>
       <CartImage>
@@ -20,7 +20,12 @@ function CartItem({ item }) {
         <ItemQuantity>
           <Quantity>
             {/* <label for="Qty"> </label> */}
-            <QuantitySelect name="Qty" id="qty" value={item.quantity}>
+            <QuantitySelect
+              name="Qty"
+              id="qty"
+              value={item.quantity}
+              onChange={(e) => changeItemQuantity(e, index)}
+            >
               <option value="1">Qty:1</option>
               <option value="2">Qty:2</option>
               <option value="3">Qty:3</option>
