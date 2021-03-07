@@ -13,7 +13,7 @@ function App() {
     <Container>
       <Header users={users} />
       <CartContainer>
-        <CartItems items={cartItems} />
+        <CartItems items={cartItems} setCartItems={setCartItems} />
         <CartTotal items={cartItems} />
       </CartContainer>
     </Container>

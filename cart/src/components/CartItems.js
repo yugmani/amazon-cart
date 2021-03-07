@@ -3,15 +3,34 @@ import styled from "styled-components";
 
 import CartItem from "./CartItem";
 
-function CartItems({ items }) {
+function CartItems({ items, setCartItems }) {
+  const deleteItem = (indexToDelete) => {
+    //Create a deleteItem() function
+    //Pass the function from CartItems to CartItem component
+    //Pass the index of the item to know which item to delete
+    //Use the filter() function in es6 to filter out item based on index
+    //Update the items using setCartItems() function
+    // console.log("index:", index);
+
+    const newItems = items.filter((item, index) => {
+      return index != indexToDelete;
+    });
+    console.log(newItems);
+    setCartItems(newItems);
+  };
   const changeItemQuantity = (e, index) => {
     //When we select a quantity on item, we pass it in here
     //Pass in the index
     //using the index we need to change the quantity to the selected one from select option
     //update the items state
-    console.log(e.target.value);
-    console.log("index:", index);
-    items[index].quantity = e.target.value;
+
+    // console.log(e.target.value);
+    // console.log("index:", index);
+    //DO NOT UPDATE THE STATE WITHOUT setter function
+    const newItems = [...items];
+    // console.log(newItems);
+    newItems[index].quantity = e.target.value;
+    setCartItems(newItems);
   };
 
   return (
@@ -25,6 +44,7 @@ function CartItems({ items }) {
             key={index}
             item={item}
             changeItemQuantity={changeItemQuantity}
+            deleteItem={deleteItem}
           />
         ))}
       </CartContainer>

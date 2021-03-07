@@ -3,7 +3,7 @@ import styled from "styled-components";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 
-function CartItem({ index, item, changeItemQuantity }) {
+function CartItem({ index, item, changeItemQuantity, deleteItem }) {
   return (
     <ItemContainer>
       <CartImage>
@@ -35,7 +35,7 @@ function CartItem({ index, item, changeItemQuantity }) {
             {/* <ArrowDropDownIcon /> */}
           </Quantity>
           <ItemDivider>|</ItemDivider>
-          <ItemDelete>
+          <ItemDelete onClick={deleteItem.bind(this, index)}>
             Delete
             {/* <DeleteOutlineIcon /> */}
           </ItemDelete>
