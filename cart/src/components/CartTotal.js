@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import NumberFormat from "react-number-format";
+import SubTotal from "./SubTotal";
 
 function CartTotal({ items }) {
   const getTotalPrice = () => {
@@ -23,12 +24,18 @@ function CartTotal({ items }) {
   return (
     <Container>
       <CartHeaderContainer>
-        <h2>Cart Total</h2>
+        <h2>Your Cart</h2>
         <ShoppingBasketIcon />
       </CartHeaderContainer>
       <TotalContainer>
+        {items.map((item, index) => (
+          <SubTotal index={index} key={index} item={item} />
+        ))}
+
+        {/* <h3>Total Items: {items.length}</h3> */}
         <HeaderThree>
-          Subtotal({getTotalQuantity()}):
+          <SubTotalHeading>Subtotal:({getTotalQuantity()})</SubTotalHeading>
+
           <TotalPriceContainer>
             <NumberFormat
               value={getTotalPrice()}
@@ -38,7 +45,7 @@ function CartTotal({ items }) {
               decimalScale={2}
               fixedDecimalScale={true}
             />
-          </TotalPriceContainer>{" "}
+          </TotalPriceContainer>
         </HeaderThree>
       </TotalContainer>
       <ButtonContainer>Proceed to checkout</ButtonContainer>
@@ -66,11 +73,24 @@ const TotalContainer = styled.div`
   margin-bottom: 20px;
 `;
 
-const HeaderThree = styled.h3``;
+const HeaderThree = styled.div`
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 20px;
+`;
 
-const TotalPriceContainer = styled.span`
+const SubTotalHeading = styled.div``;
+
+const TotalPriceContainer = styled.div`
   padding-left: 8px;
-  font-weight: lighter;
+  font-weight: bold;
 `;
 
 const ButtonContainer = styled.button`
